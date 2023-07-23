@@ -1,13 +1,20 @@
-import React from 'react'
+import React from 'react';
 
 export default function NavBar() {
-  return (
+	return (
 		<>
-			<div className='navbar bg-base-100'>
-				<div className='flex-1'>
-					<a className='btn btn-ghost normal-case text-xl'>
-						daisyUI
+			<div className='navbar bg-base-200  flex justify-between fixed z-50 top-0'>
+				<div className='flex'>
+					<a className='btn btn-ghost normal-case text-xl font-serif'>
+						LocksLuxe🥂
 					</a>
+				</div>
+				<div className='form-control max-w-[24rem] w-full'>
+					<input
+						type='text'
+						placeholder='Search'
+						className='input input-bordered w-full '
+					/>
 				</div>
 				<div className='flex-none'>
 					<div className='dropdown dropdown-end'>
@@ -79,6 +86,5 @@ export default function NavBar() {
 				</div>
 			</div>
 		</>
-  );
+	);
 }
-
