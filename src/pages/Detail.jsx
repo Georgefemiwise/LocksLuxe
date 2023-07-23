@@ -47,13 +47,22 @@ export default function Detail() {
 							/>
 							<span className='ml-2'>34</span>
 						</div>
-						<div className='pricing cartigory'>
+						<div className='pricing '>
 							<h5 className='mb-3 '>
 								<span>Price</span> 50 ghc
 							</h5>
-							<div className="badge badge-secondary">human</div>
-							<div className="badge badge-accent">human</div>
-							<div className="badge badge-primary">human</div>
+							<div className='cartigory flex gap-2 items-center'>
+								<h5 className="">Category</h5>
+								<div className='badge badge-secondary'>
+									human
+								</div>
+								<div className='badge badge-accent'>
+									cow
+								</div>
+								<div className='badge badge-primary'>
+									egg
+								</div>
+							</div>
 						</div>
 						<div className='divider'></div>
 						<h3>
