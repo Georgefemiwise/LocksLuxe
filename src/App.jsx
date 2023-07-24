@@ -8,9 +8,9 @@ export default function App() {
 		<div className='relative font-serif'>
 			<header className='mb-20'>
 				<NavBar />
-      </header>
-      <Detail/>
-			{/* <div className='justify-center  grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 p-5'>
+			</header>
+			<Detail />
+			<div className='justify-center  grid lg:grid-cols-4 xl:grid-cols-5 selection: md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 p-5'>
 				<Card />
 				<Card />
 				<Card />
@@ -23,7 +23,7 @@ export default function App() {
 				<Card />
 				<Card />
 				<Card />
-			</div> */}
+			</div>
 		</div>
 	);
 }

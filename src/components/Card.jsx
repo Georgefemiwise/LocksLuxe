@@ -1,13 +1,19 @@
-import React from 'react' 
-import wig from '../assets/wig.png'
+import React from 'react';
+import wig from '../assets/wig.png';
 
 export default function Card() {
-  return (
+	return (
 		<>
 			<div className='card bg-base-300 shadow-sm hover:shadow-neutral-200'>
-				<figure className='px-10 pt-10'>
-					<img src={wig} alt='Shoes' className='rounded-lg' />
-				</figure>
+				<a href='#' className='cursor-pointer'>
+					<figure className='px-10 pt-10'>
+						<img
+							src={wig}
+							alt='Shoes'
+							className='rounded-lg'
+						/>
+					</figure>
+				</a>
 				<div className='card-body'>
 					<h2 className='card-title'>Dommy Name</h2>
 					<div className='rating rating-sm items-center'>
@@ -36,8 +42,8 @@ export default function Card() {
 							type='radio'
 							name='rating-6'
 							className='mask mask-star-2 bg-orange-400'
-					  />
-					  <span className='ml-2'>34</span>
+						/>
+						<span className='ml-2'>34</span>
 					</div>
 					<p>If a dog chews shoes whose shoes does he choose?</p>
 					<div className='card-actions'>
@@ -51,5 +57,5 @@ export default function Card() {
 				</div>
 			</div>
 		</>
-  );
+	);
 }
