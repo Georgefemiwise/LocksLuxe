@@ -1,10 +1,11 @@
 import React from 'react';
 import wig from '../assets/wig.png';
+import Button from './Button';
 
-export default function Card() {
+export default function WigCard({ name, price, description, ratings, image }) {
 	return (
 		<>
-			<div className='card bg-base-300 shadow-sm hover:shadow-neutral-200'>
+			<div className='card bg-base-300 shadow-sm hover:shadow-neutral-100'>
 				<a href='#' className='cursor-pointer'>
 					<figure className='px-10 pt-10'>
 						<img
@@ -12,47 +13,50 @@ export default function Card() {
 							alt='Shoes'
 							className='rounded-lg'
 						/>
+						{/* <img
+							src={image}
+							alt={`${name}`}
+							className='rounded-lg'
+						/> */}
 					</figure>
 				</a>
 				<div className='card-body'>
-					<h2 className='card-title'>Dommy Name</h2>
-					<div className='rating rating-sm items-center'>
-						<input
-							type='radio'
-							name='rating-6'
-							className='mask mask-star-2 bg-orange-400'
-						/>
-						<input
-							type='radio'
-							name='rating-6'
-							className='mask mask-star-2 bg-orange-400'
-							checked
-						/>
-						<input
-							type='radio'
-							name='rating-6'
-							className='mask mask-star-2 bg-orange-400'
-						/>
-						<input
-							type='radio'
-							name='rating-6'
-							className='mask mask-star-2 bg-orange-400'
-						/>
-						<input
-							type='radio'
-							name='rating-6'
-							className='mask mask-star-2 bg-orange-400'
-						/>
-						<span className='ml-2'>34</span>
+					<h2 className='card-title'>{name}</h2>
+					<div className='flex justify-between'>
+						<div className='rating rating-sm items-center'>
+							<input
+								type='radio'
+								name={`rating-6-${name}`}
+								className='mask mask-star-2 bg-orange-500'
+							/>
+							<input
+								type='radio'
+								name={`rating-6-${name}`}
+								className='mask mask-star-2 bg-orange-500'
+							/>
+							<input
+								type='radio'
+								name={`rating-6-${name}`}
+								className='mask mask-star-2 bg-orange-500'
+							/>
+							<input
+								type='radio'
+								name={`rating-6-${name}`}
+								className='mask mask-star-2 bg-orange-500'
+							/>
+							<input
+								type='radio'
+								name={`rating-6-${name}`}
+								className='mask mask-star-2 bg-orange-500'
+							/>
+							<span className='ml-2'></span>
+						</div>
+						<p>{price}</p>
 					</div>
-					<p>If a dog chews shoes whose shoes does he choose?</p>
+					<p>{description}</p>
 					<div className='card-actions'>
-						<button className='btn btn-primary'>
-							Buy Now
-						</button>
-						<button className='btn btn-outline'>
-							add to cart
-						</button>
+						<Button value={'buy now'} style={'primary'} />
+						<Button value={'add to cart'} style={'outline'} />
 					</div>
 				</div>
 			</div>
