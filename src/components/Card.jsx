@@ -1,12 +1,13 @@
 import React from 'react';
 import wig from '../assets/wig.png';
 import Button from './Button';
+import { Link } from 'react-router-dom';
 
-export default function WigCard({ name, price, description, ratings, image }) {
+export default function WigCard({ name, price, description, ratings, image, id}) {
 	return (
 		<>
 			<div className='card bg-base-300 shadow-sm hover:shadow-neutral-100'>
-				<a href='#' className='cursor-pointer'>
+				<Link to={`/products/${id}`} className='cursor-pointer'>
 					<figure className='px-10 pt-10'>
 						<img
 							src={wig}
@@ -19,7 +20,7 @@ export default function WigCard({ name, price, description, ratings, image }) {
 							className='rounded-lg'
 						/> */}
 					</figure>
-				</a>
+				</Link>
 				<div className='card-body'>
 					<h2 className='card-title'>{name}</h2>
 					<div className='flex justify-between'>
