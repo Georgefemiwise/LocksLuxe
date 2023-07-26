@@ -9,13 +9,7 @@ export default function NavBar() {
 						LocksLuxe🥂
 					</a>
 				</div>
-				<div className='form-control max-w-[24rem] w-full'>
-					<input
-						type='text'
-						placeholder='Search'
-						className='input input-bordered w-full '
-					/>
-				</div>
+				
 				<div className='flex-none'>
 					<div className='dropdown dropdown-end'>
 						<label

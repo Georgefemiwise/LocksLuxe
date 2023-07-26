@@ -66,7 +66,7 @@ export default function Detail() {
 						</div>
 						<div className='divider'></div>
 						<h3>
-							<p className='font-bold'>Description</p>
+							<p className='font-bold mb-3'>Description</p>
 							Lorem ipsum dolor, sit amet consectetur
 							adipisicing elit. Sequi quo mollitia illum
 							blanditiis earum nisi, similique atque,
