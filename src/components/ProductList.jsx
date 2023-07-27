@@ -34,12 +34,14 @@ export function ProductList({ wigsData }) {
 					filteredWigs.map((wig) => (
 						<Card
 							key={wig.wig_id}
+							id={wig.wig_id}
 							name={wig.wig_name}
 							price={wig.price}
 							image={wig.image_url}
 							description={
 								wig.description.slice(0, 50) + '...'
 							}
+							isAvailable={wig.availability}
 						/>
 					))
 				)}

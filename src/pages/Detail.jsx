@@ -1,6 +1,19 @@
 import React from 'react';
 import wig from '../assets/wig.png';
-export default function Detail() {
+import { wigData } from '../wigData';
+import { useParams } from 'react-router-dom';
+
+export default function Detail({ addToCart }) {
+	const { id } = useParams();
+
+	const productId = id; // No need to parse as it's already a string
+
+	const selectedProduct = wigData.find((p) => p.wig_id === productId);
+
+	if (!selectedProduct) {
+		return <div>Product not found.</div>;
+	}
+
 	return (
 		<div className='flex  justify-center max-h-screen px-40'>
 			<div className='grid grid-cols-3 gap-10'>
@@ -16,9 +29,9 @@ export default function Detail() {
 				<div className='details col-span-2'>
 					<div className='card-body'>
 						<h1 className='card-title font-extrabold text-5xl'>
-							Dommy Name
+							{selectedProduct.wig_name}
 						</h1>
-						<div className='rating rating-sm items-center'>
+						{/* <div className='rating rating-sm items-center'>
 							<input
 								type='radio'
 								name='rating-6'
@@ -45,42 +58,36 @@ export default function Detail() {
 								name='rating-6'
 								className='mask mask-star-2 bg-orange-400'
 							/>
-							<span className='ml-2'>34</span>
-						</div>
+						</div> */}
 						<div className='pricing '>
 							<h5 className='mb-3 '>
-								<span>Price</span> 50 ghc
+								<span>Price</span>{' '}
+								{selectedProduct.price}
 							</h5>
 							<div className='cartigory flex gap-2 items-center'>
-								<h5 className="">Category</h5>
+								<h5 className=''>Type</h5>
 								<div className='badge badge-secondary'>
-									human
-								</div>
-								<div className='badge badge-accent'>
-									cow
-								</div>
-								<div className='badge badge-primary'>
-									egg
+									{selectedProduct.wig_type}
 								</div>
 							</div>
 						</div>
 						<div className='divider'></div>
 						<h3>
 							<p className='font-bold mb-3'>Description</p>
-							Lorem ipsum dolor, sit amet consectetur
-							adipisicing elit. Sequi quo mollitia illum
-							blanditiis earum nisi, similique atque,
-							fugiat quas unde perferendis, nihil
-							consequatur minus. At quo delectus numquam
-							vero perspiciatis.
+							{selectedProduct.description}
 						</h3>
 
 						<div className='card-actions'>
 							<button className='btn btn-primary'>
 								Buy Now
 							</button>
-							<button className='btn btn-outline'>
-								add to cart
+
+							<button
+								className='btn btn-outline'
+								onClick={() =>
+									addToCart(selectedProduct)
+								}>
+								Add to Cart
 							</button>
 						</div>
 					</div>

@@ -1,15 +1,16 @@
 import React from 'react';
+import Cart from '../pages/Cart';
 
 export default function NavBar() {
 	return (
 		<>
-			<div className='navbar bg-base-200  flex justify-between fixed z-50 top-0'>
+			<div className='navbar bg-base-200  flex justify-between  z-50 top-0'>
 				<div className='flex'>
 					<a className='btn btn-ghost normal-case text-xl font-serif'>
 						LocksLuxe🥂
 					</a>
 				</div>
-				
+
 				<div className='flex-none'>
 					<div className='dropdown dropdown-end'>
 						<label
@@ -45,6 +46,9 @@ export default function NavBar() {
 									Subtotal: $999
 								</span>
 								<div className='card-actions'>
+									<a href='cart' className='btn'>
+										view cart
+									</a>
 									<button className='btn btn-primary btn-block'>
 										View cart
 									</button>
@@ -79,6 +83,7 @@ export default function NavBar() {
 					</div>
 				</div>
 			</div>
+			<Cart/>
 		</>
 	);
 }
