@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Product from './pages/Product';
 import Detail from './pages/Detail';
 import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';
 import NavBar from './components/NavBar';
 
 export default function App() {
@@ -24,22 +25,29 @@ export default function App() {
 	return (
 		<>
 			<NavBar cartItemCount={cartItems.length} />
+			<>
+				<Routes>
+					<Route path='/' index element={<Home />} >
+					</Route>
+					<Route
+						path='/products'
+						element={<Product addToCart={addToCart} />}
+					/>
+					<Route
+						path='/products/:id'
+						element={<Detail addToCart={addToCart} />}
+					/>
 
-			<Routes>
-				<Route path='/' index element={<Home />} />
-				<Route path='/products' element={<Product />} />
-				<Route
-					path='/products/:id'
-					element={<Detail addToCart={addToCart} />}
-				/>
+					<Route
+						path='/cart'
+						element={
+							<Cart cartItemsList={cartItems} />
+						}></Route>
+					<Route path='/checkout' element={<Checkout />} />
 
-				<Route
-					path='/cart'
-					element={<Cart cartItemsList={cartItems} />}
-				/>
-
-				<Route path='*' element={<h1>notfound</h1>} />
-			</Routes>
+					<Route path='*' element={<h1>notfound</h1>} />
+				</Routes>
+			</>
 		</>
 	);
 }

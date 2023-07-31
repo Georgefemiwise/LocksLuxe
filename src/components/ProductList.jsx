@@ -8,10 +8,12 @@ export function ProductList({ wigsData }) {
 		setSearchTerm(event.target.value);
 	};
 
+
+
+
 	const filteredWigs = wigsData.filter((wig) =>
 		wig.wig_name.toLowerCase().includes(searchTerm.toLowerCase()),
 	);
-
 	return (
 		<>
 			<div className='form-control w-full flex items-center justify-center'>
@@ -37,10 +39,9 @@ export function ProductList({ wigsData }) {
 							id={wig.wig_id}
 							name={wig.wig_name}
 							price={wig.price}
+							description={wig.description}
+							rating={wig.ratings}
 							image={wig.image_url}
-							description={
-								wig.description.slice(0, 50) + '...'
-							}
 							isAvailable={wig.availability}
 						/>
 					))

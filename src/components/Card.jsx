@@ -7,36 +7,45 @@ export default function WigCard({
 	name,
 	price,
 	description,
-	ratings,
+	rating,
 	image,
 	id,
 	isAvailable,
+	addToCart,
 }) {
-	const rate = ({ name, rateing }) => {
+	const getRatings = ({ name, star }) => {
 		const rates = [];
-		for (let i = 0; i < rateing; i++) {
+		for (let i = 1; i <= 5; i++) {
 			rates.push(
 				<input
+					key={i}
 					type='radio'
-					name={`rating-6-${name}`}
-					className='mask mask-star-2 bg-orange-500'
+					name={`rating-${name}`}
+					className={`mask mask-heart   ${
+						i <= star && 'checked bg-primary'
+					}`}
+					checked={i <= star}
+					readOnly
 				/>,
 			);
 		}
 		return rates;
 	};
 
+	const stars = rating.stars;
+	const ratingInputs = getRatings({ name, stars });
+
 	return (
 		<>
 			<div className='card bg-base-300 shadow-sm hover:shadow-neutral-100'>
 				<div
-					className={`absolute badge  right-0 m-3  badge-${
-						isAvailable && 'success'
+					className={`absolute badge  right-0 m-3 ${
+						isAvailable && ' badge-success'
 					}`}>
-					{isAvailable ? 'Avalaiable' : ' Not Available'}
+					{isAvailable ? 'Available' : 'Not Available'}
 				</div>
-				<Link to={`/products/${id}`} className='cursor-pointer '>
-					<figure className='px-10s pt-10 '>
+				<Link to={`/products/${id}`} className='cursor-pointer'>
+					<figure className='px-10 pt-10'>
 						<img
 							src={wig}
 							alt={`${name}`}
@@ -46,17 +55,22 @@ export default function WigCard({
 				</Link>
 				<div className='card-body'>
 					<h2 className='card-title'>{name}</h2>
-					<div className='flex justify-between text-sm'>
-						<div className='rating rating-sm items-center'>
-							{rate(name,5)}
-							<span className='ml-2'></span>
+					<div className=' justify-between text-sm'>
+						<div className='rating rating-sm items-center '>
+							{ratingInputs}
+							<span className='ml-2'>
+								({rating.comments})
+							</span>
 						</div>
-						<p>{price}</p>
+						<p className='text-secondary'>{price}</p>
 					</div>
-					<p>{description}</p>
+					<p>{description.slice(0, 50) + '...'}</p>
 					<div className='card-actions'>
 						<Button value={'buy now'} style={'primary'} />
-						<Button value={'add to cart'} style={'outline'} />
+						<Button
+							value={'add to cart'}
+							onClick={() => addToCart(id)}
+						/>
 					</div>
 				</div>
 			</div>

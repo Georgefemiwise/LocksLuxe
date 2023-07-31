@@ -1,12 +1,12 @@
 import React from 'react';
 import Cart from '../pages/Cart';
-
-export default function NavBar() {
+import { Link } from 'react-router-dom';
+export default function NavBar({ cartItemCount }) {
 	return (
 		<>
 			<div className='navbar bg-base-200  flex justify-between  z-50 top-0'>
 				<div className='flex'>
-					<a className='btn btn-ghost normal-case text-xl font-serif'>
+					<a className=' normal-case text-xl font-serif'>
 						LocksLuxe🥂
 					</a>
 				</div>
@@ -31,7 +31,7 @@ export default function NavBar() {
 									/>
 								</svg>
 								<span className='badge badge-sm indicator-item'>
-									8
+									{cartItemCount}
 								</span>
 							</div>
 						</label>
@@ -40,18 +40,18 @@ export default function NavBar() {
 							className='mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow'>
 							<div className='card-body'>
 								<span className='font-bold text-lg'>
-									8 Items
+									{cartItemCount} Item
+									{cartItemCount > 1 && 's'}
 								</span>
 								<span className='text-info'>
 									Subtotal: $999
 								</span>
 								<div className='card-actions'>
-									<a href='cart' className='btn'>
+									<Link
+										to='cart'
+										className='btn btn-primary btn-block'>
 										view cart
-									</a>
-									<button className='btn btn-primary btn-block'>
-										View cart
-									</button>
+									</Link>
 								</div>
 							</div>
 						</div>
@@ -83,7 +83,6 @@ export default function NavBar() {
 					</div>
 				</div>
 			</div>
-			<Cart/>
 		</>
 	);
 }
