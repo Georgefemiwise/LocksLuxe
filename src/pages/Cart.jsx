@@ -19,41 +19,69 @@ export default function Cart({ cartItemsList }) {
 		setCartItems(updatedCart);
 	};
 
-	console.log('Adding to cart:', cartItems);
-
-	// console.log(wigData);
-
 	return (
 		<div className='mt-10 px-10'>
-			<h2 className='font-black text-4xl'>Cart</h2>
-			<Link
-				className='w-fit border border-neutral rounded px-4 hover:text-primary'
-				to={'/products'}>
-				{'< '}Go back to menu
-			</Link>
+			<div className='w-full my-5'>
+				<h2 className='font-black text-4xl'>Cart</h2>
+			</div>
+
 			{cartItems.length === 0 ? (
 				<p className='mt-10 text-center'>Your cart is empty.</p>
 			) : (
-				<ul className='mt-10'>
-					{cartItems.map((item) => (
-						<li
-							className=' flex justify-between items-center hover:bg-neutral-focus px-3 my-2'
-							key={item.wig_id}>
-							<span>{item.wig_name}</span>
-							<button
-								className='btn btn-sm btn-error'
-								onClick={() =>
-									removeFromCart(item.wig_id)
-								}>
-								Remove
-							</button>
-						</li>
-					))}
-				</ul>
+				<div className='mt-10 flex flex-col justify-center items-center'>
+					<div className='overflow-x-auto w-4/5 '>
+						<table className='table table-sm '>
+							{/* head */}
+							<thead>
+								<tr>
+									<th></th>
+									<th>Name</th>
+									<th>Amount</th>
+									<th>Price</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								{cartItems.map((item, index) => (
+									<tr key={item.wig_id}>
+										<th>{index + 1}</th>
+										<td>{item.wig_name}</td>
+										<td>
+											<input
+												className='input input-primary'
+												type='number'
+												name='amount'
+												id='amount'
+												valur=''
+											/>
+										</td>
+										<td>5</td>
+										<td className='float-right'>
+											<button
+												className='btn btn-sm btn-error'
+												onClick={() =>
+													removeFromCart(
+														item.wig_id,
+													)
+												}>
+												Remove
+											</button>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+				</div>
 			)}
-			<Link className='btn btn-success' to='checkout'>
-				Checkout
-			</Link>
+			<div className='flex gap-3 w-1/4 pl-32'>
+				<Link className='btn btn-outline' to={'/products'}>
+					Go back
+				</Link>
+				<Link className='btn btn-success' to='checkout'>
+					Checkout
+				</Link>
+			</div>
 		</div>
 	);
 }

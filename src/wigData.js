@@ -45,7 +45,7 @@ export const wigData = [
 		density: '120%',
 		cap_size: 'Average',
 		price: '$189.99',
-		ratings: { comments: 32, stars: 3 },
+		ratings: { comments:45, stars: 4 },
 		description:
 			"Rock a trendy and playful look with this curly bob human hair wig. The full lace design offers a natural-looking hairline and allows for off-the-face styling. Made from 100% human hair, it provides a soft and bouncy texture that's easy to manage. The wig comes in a beautiful golden blonde shade, perfect for a chic and sassy style.",
 		image_url: 'https://www.example.com/images/wig_21.jpg',
@@ -62,7 +62,7 @@ export const wigData = [
 		density: '110%',
 		cap_size: 'Average',
 		price: '$69.99',
-		ratings: { comments: 32, stars: 3 },
+		ratings: { comments: 53, stars: 5 },
 		description:
 			'Embrace a bold and edgy look with this short pixie cut synthetic wig. The standard cap design ensures a secure fit, and the synthetic fiber offers a vibrant platinum silver color. With its short length and chic style, this wig is perfect for making a fashion statement and expressing your individuality.',
 		image_url: 'https://www.example.com/images/wig_22.jpg',
@@ -79,7 +79,7 @@ export const wigData = [
 		density: '150%',
 		cap_size: 'Average',
 		price: '$199.99',
-		ratings: { comments: 32, stars: 3 },
+		ratings: { comments: 20, stars: 2 },
 		description:
 			'Achieve a sophisticated look with this elegant wavy human hair wig. The lace front creates a natural-looking hairline, and the wavy texture adds volume and movement. It is made from 100% human hair, allowing for versatile styling. The wig has a medium cap size and a comfortable fit with adjustable straps. Available in a stylish natural black color, perfect for daily wear or special occasions.',
 		image_url: 'https://www.example.com/images/wig_12345.jpg',
@@ -96,7 +96,7 @@ export const wigData = [
 		length: '14 inches',
 		density: '150%',
 		cap_size: 'Average',
-		ratings: { comments: 32, stars: 3 },
+		ratings: { comments: 42, stars: 4 },
 		price: '$199.99',
 		description:
 			'Achieve a sophisticated look with this elegant wavy human hair wig. The lace front creates a natural-looking hairline, and the wavy texture adds volume and movement. It is made from 100% human hair, allowing for versatile styling. The wig has a medium cap size and a comfortable fit with adjustable straps. Available in a stylish natural black color, perfect for daily wear or special occasions.',
@@ -166,7 +166,7 @@ export const wigData = [
 		density: '110%',
 		cap_size: 'Average',
 		price: '$64.99',
-		ratings: { comments: 32, stars: 3 },
+		ratings: { comments: 23, stars: 3 },
 		description:
 			'Express your bold and trendy style with this short layered synthetic wig. The standard cap design ensures a comfortable fit, and the synthetic fiber offers a vibrant auburn red color. With its layered texture and chic style, this wig is perfect for making a fashion statement and adding a pop of color to your look.',
 		image_url: 'https://www.example.com/images/wig_9.jpg',

@@ -13,13 +13,45 @@ export default function Detail({ addToCart }) {
 	if (!selectedProduct) {
 		return <div>Product not found.</div>;
 	}
+	// Helper function to generate rating radio buttons with different background colors
+	const getRatings = ({ name, star }) => {
+		const rates = [];
+		const colors = [
+			'bg-red-500',
+			'bg-blue-500',
+			'bg-green-500',
+			'bg-yellow-500',
+			'bg-purple-500',
+		];
+		for (let i = 1; i <= 5; i++) {
+			rates.push(
+				<input
+					key={i}
+					type='radio'
+					name={`rating-${name}`}
+					className={`mask mask-heart ${colors[i]} ${
+						i >= parseInt(star) && 'bg-neutral-focus'
+					}`}
+					checked={i === parseInt(star)}
+					readOnly
+				/>,
+			);
+		}
+		return rates;
+	};
+	// Extracting the star rating from the 'rating' prop
+	const stars = selectedProduct.ratings.stars;
+
+	// Generating the rating radio buttons with background colors based on the star rating
+	const ratingInputs = getRatings({
+		name: selectedProduct.wig_name,
+		star: stars,
+	});
 
 	return (
 		<div className='card  mt-10 justify-center  md:px-40 px-10'>
-			<Link
-				className='w-fit border border-neutral px-4 hover:text-primary'
-				to={'/products'}>
-				{'< '}Go Back
+			<Link className='btn btn-outline' to={'/products'}>
+				Go back
 			</Link>
 			<div className='md:flex gap-10'>
 				<div className='image  '>
@@ -37,32 +69,7 @@ export default function Detail({ addToCart }) {
 							{selectedProduct.wig_name}
 						</h1>
 						<div className='rating rating-sm items-center'>
-							<input
-								type='radio'
-								name='rating-6'
-								className='mask mask-star-2 bg-orange-400'
-							/>
-							<input
-								type='radio'
-								name='rating-6'
-								className='mask mask-star-2 bg-orange-400'
-								checked
-							/>
-							<input
-								type='radio'
-								name='rating-6'
-								className='mask mask-star-2 bg-orange-400'
-							/>
-							<input
-								type='radio'
-								name='rating-6'
-								className='mask mask-star-2 bg-orange-400'
-							/>
-							<input
-								type='radio'
-								name='rating-6'
-								className='mask mask-star-2 bg-orange-400'
-							/>
+							{ratingInputs}
 						</div>
 						<div className='pricing '>
 							<h5 className='mb-3 '>

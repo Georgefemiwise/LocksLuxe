@@ -2,20 +2,22 @@ import React, { useState } from 'react';
 import Card from './Card';
 
 export function ProductList({ wigsData }) {
+	// State to hold the search term entered in the input field
 	const [searchTerm, setSearchTerm] = useState('');
 
+	// Event handler for updating the search term state
 	const handleSearch = (event) => {
 		setSearchTerm(event.target.value);
 	};
 
-
-
-
+	// Filter the wigs based on the search term
 	const filteredWigs = wigsData.filter((wig) =>
 		wig.wig_name.toLowerCase().includes(searchTerm.toLowerCase()),
 	);
+
 	return (
 		<>
+			{/* Input field for searching wigs */}
 			<div className='form-control w-full flex items-center justify-center'>
 				<input
 					type='text'
@@ -25,14 +27,18 @@ export function ProductList({ wigsData }) {
 					className='input max-w-[30rem] input-bordered w-full'
 				/>
 			</div>
-			<div className='justify-center grid lg:grid-cols-4 max-w-screen-2xl selection: md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 p-5'>
+
+			{/* Display the filtered wigs in a grid layout */}
+			<div className='justify-center grid lg:grid-cols-4 max-w-screen-2xl md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 p-5'>
 				{filteredWigs.length === 0 ? (
-					<div className='w-full left-0 flex justify-center absolute '>
+					// If no wigs match the search term, display a message
+					<div className='w-full left-0 flex justify-center absolute'>
 						<p className='font-semibold text-2xl capitalize'>
 							🥶Sorry "{searchTerm}" not found.
 						</p>
 					</div>
 				) : (
+					// Otherwise, map through the filtered wigs and render the Card component
 					filteredWigs.map((wig) => (
 						<Card
 							key={wig.wig_id}
