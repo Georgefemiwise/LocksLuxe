@@ -3,59 +3,89 @@
 // Replace these with your database credentials
 require('connection.php');
 
-// Assuming you get the product details from the frontend
-if (isset($_POST['wig_ID']) && isset($_POST['quantity']) && isset($_POST['user_ID'])) {
-    $product_id = $_POST['wig_ID'];
-    $quantity = $_POST['wig_name'];
-    $user_id = $_POST['user_ID'];
-    // $quantity = $_POST['quantity'];
-    // $user_id = $_POST['user_ID'];
+// Replace these credentials with your database connection details
+// $host = 'localhost';
+// $dbname = 'ecommerce_db';
+// $username = 'your_username';
+// $password = 'your_password';
 
-    // Check if the product exists in the database
-    $sql = "SELECT * FROM products WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $product_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+// try {
+//     // Connect to the database
+//     $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+//     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// } catch (PDOException $e) {
+//     die("Connection failed: " . $e->getMessage());
+// }
 
-    if ($result->num_rows == 1) {
-        // Product exists, add it to the cart
-        $row = $result->fetch_assoc();
-        $product_name = $row['name'];
-        $product_price = $row['price'];
+// Function to add an item to the cart
+function addToCart($wig_id, $wig_quantity, $unit_price, $total_price, $cart_status)
+{
+    global $conn;
+    try {
+        $stmt = $conn->prepare("INSERT INTO carts (wig_ID, product_quantity, unit_price, total_price, cart_status)
+                                VALUES ( :wig_id, :product_quantity, :unit_price, :total_price, :cart_status)");
+        
+        $stmt->bindParam(':wig_ID', $wig_id);
+        $stmt->bindParam(':product_quantity', $wig_quantity);
+        $stmt->bindParam(':unit_price', $unit_price);
+        $stmt->bindParam(':total_price', $total_price);
+        $stmt->bindParam(':cart_status', $cart_status);
 
-        // Check if the product is already in the cart for the user
-        $sql = "SELECT * FROM cart WHERE wig_id = ? AND user_id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ii', $product_id, $user_id);
         $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows == 1) {
-            // Product is already in the cart, update the quantity
-            $row = $result->fetch_assoc();
-            $cart_id = $row['id'];
-            $new_quantity = $row['quantity'] + $quantity;
-
-            $sql = "UPDATE cart SET quantity = ? WHERE id = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param('ii', $new_quantity, $cart_id);
-            $stmt->execute();
-        } else {
-            // Product is not in the cart, insert a new row
-            $sql = "INSERT INTO cart ( user_id, quantity) VALUES (?, ?, )";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param('iii', $product_id, $user_id, $quantity);
-            $stmt->execute();
-        }
-
-        echo "Product added to the cart successfully.";
-    } else {
-        echo "Product not found.";
+        return true;
+    } catch (PDOException $e) {
+        // Handle any errors here
+        return false;
     }
-} else {
-    echo "Invalid request.";
 }
 
-$conn->close();
+// Function to retrieve all cart items for a specific cart
+function getCartItemsByUser($cart_id)
+{
+    global $conn;
+    try {
+        $stmt = $conn->prepare("SELECT * FROM carts WHERE id = :cart_id");
+        $stmt->bindParam(':cart_ID', $cart_id);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        // Handle any errors here
+        return [];
+    }
+}
+
+// Function to update cart item quantity
+function updateCartItemQuantity($cart_id, $new_quantity)
+{
+    global $conn;
+    try {
+        $stmt = $conn->prepare("UPDATE carts SET product_quantity = :new_quantity WHERE id = :cart_id");
+        $stmt->bindParam(':new_quantity', $new_quantity);
+        $stmt->bindParam(':cart_id', $cart_id);
+        $stmt->execute();
+        return true;
+    } catch (PDOException $e) {
+        // Handle any errors here
+        return false;
+    }
+}
+
+// Function to remove an item from the cart
+function removeFromCart($cart_id)
+{
+    global $conn;
+    try {
+        $stmt = $conn->prepare("DELETE FROM carts WHERE id = :cart_id");
+        $stmt->bindParam(':cart_id', $cart_id);
+        $stmt->execute();
+        return true;
+    } catch (PDOException $e) {
+        // Handle any errors here
+        return false;
+    }
+}
+
+// Close the database connection
+$conn = null;
+
 ?>
