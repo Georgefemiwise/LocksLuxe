@@ -29,12 +29,12 @@ export function ProductList({ wigsData }) {
 			</div>
 
 			{/* Display the filtered wigs in a grid layout */}
-			<div className='justify-center grid lg:grid-cols-4 max-w-screen-2xl md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 p-5'>
+			<div className='justify-center grid px-10 lg:grid-cols-4 max-w-screen-xl md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 p-5'>
 				{filteredWigs.length === 0 ? (
 					// If no wigs match the search term, display a message
 					<div className='w-full left-0 flex justify-center absolute'>
 						<p className='font-semibold text-2xl capitalize'>
-							🥶Sorry "{searchTerm}" not found.
+							item not found.
 						</p>
 					</div>
 				) : (

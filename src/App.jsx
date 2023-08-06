@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Product from './pages/Product';
+import Payment from './pages/Payment';
 import Detail from './pages/Detail';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
@@ -24,14 +25,19 @@ export default function App() {
 	};
 	return (
 		<>
-			<NavBar cartItemCount={cartItems.length} />
-			<>
+			<div className=' fixed w-full z-50'>
+				<NavBar cartItemCount={cartItems.length} />
+			</div>
+			<div className='grid justify-center  min-h-screen px-32 py-24 '>
 				<Routes>
-					<Route path='/' index element={<Home />} >
-					</Route>
+					<Route path='/' index element={<Home />}></Route>
 					<Route
 						path='/products'
 						element={<Product addToCart={addToCart} />}
+					/>
+					<Route
+						path='/payment'
+						element={<Payment addToCart={addToCart} />}
 					/>
 					<Route
 						path='/products/:id'
@@ -40,14 +46,13 @@ export default function App() {
 
 					<Route
 						path='/cart'
-						element={
-							<Cart cartItemsList={cartItems} />
-						}></Route>
-					<Route path='/checkout' element={<Checkout />} />
+						element={<Cart cartItemsList={cartItems} />}>
+						<Route path='checkout' element={<Checkout />} />
+					</Route>
 
 					<Route path='*' element={<h1>notfound</h1>} />
 				</Routes>
-			</>
+			</div>
 		</>
 	);
 }

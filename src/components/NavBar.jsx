@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default function NavBar({ cartItemCount }) {
 	return (
 		<>
-			<div className='navbar bg-base-200 px-6 mb-6 '>
+			<div className='navbar bg-base-200 px-6 mb-6 z-50 border-b border-b-neutral-content'>
 				<div className='navbar-start'>
 					<div className='dropdown'>
 						<label

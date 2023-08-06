@@ -19,11 +19,11 @@ export default function WigCard({
 	const getRatings = ({ name, star }) => {
 		const rates = [];
 		const colors = [
-			'bg-red-500',
-			'bg-blue-500',
-			'bg-green-500',
-			'bg-yellow-500',
-			'bg-purple-500',
+			'bg-red-100',
+			'bg-blue-100',
+			'bg-green-100',
+			'bg-yellow-100',
+			'bg-purple-100',
 		];
 		for (let i = 1; i <= 5; i++) {
 			rates.push(
@@ -31,9 +31,9 @@ export default function WigCard({
 					key={i}
 					type='radio'
 					name={`rating-${name}`}
-					className={`mask mask-heart ${colors[i]} ${
-						i >= parseInt(star) && 'bg-neutral-focus'
-					}`}
+					className={`mask ${
+						i <= parseInt(star) && ' mask-star-2'
+					} mask-star ${colors[i - 1]}`}
 					checked={i === parseInt(star)}
 					readOnly
 				/>,
@@ -50,9 +50,9 @@ export default function WigCard({
 
 	return (
 		<>
-			<div className='card bg-base-300 shadow-sm hover:shadow-neutral-100'>
+			<div className='card rounded-lg bg-base-300 shadow-sm  overflow-hidden group'>
 				<div
-					className={`absolute badge  right-0 m-3 ${
+					className={`absolute badge right-0 m-3 ${
 						isAvailable && 'badge-success'
 					}`}>
 					{isAvailable ? 'Available' : 'Not Available'}
@@ -62,29 +62,30 @@ export default function WigCard({
 						<img
 							src={wig}
 							alt={`${name}`}
-							className='rounded-lg h-60'
+							className='rounded-sm w-full'
 						/>
 					</figure>
 				</Link>
 				<div className='card-body'>
-					<h2 className='card-title'>{name}</h2>
 					<div className=' justify-between text-sm'>
-						<div className='rating rating-sm items-center '>
+						<div className='rating rating-xs items-center '>
 							{/* Render the generated rating radio buttons */}
 							{ratingInputs}
 							<span className='ml-2'>
-								({rating.comments})
+								{/* ({rating.comments}) */}
 							</span>
 						</div>
-						<p className='text-secondary'>{price}</p>
+						<h2 className='card-title text-sm'>{name}</h2>
+						<p className='text-lg'>Ghc {price}</p>
 					</div>
-					<p>{description.slice(0, 50) + '...'}</p>
-					<div className='card-actions'>
-						<Button value={'buy now'} style={'primary'} />
-						<Button
-							value={'add to cart'}
+					
+					<div className='card-actions  '>
+					
+						<div className="btn btn-primary w-full rounded-none border-t-2 group-hover:border-t-red-100">add to cart</div>
+						{/* <Button
+							value={'add to cart'}style={'primary'}
 							onClick={() => addToCart(id)}
-						/>
+						/> */}
 					</div>
 				</div>
 			</div>

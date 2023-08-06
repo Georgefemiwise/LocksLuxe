@@ -29,7 +29,7 @@ export default function Detail({ addToCart }) {
 					key={i}
 					type='radio'
 					name={`rating-${name}`}
-					className={`mask mask-heart ${colors[i]} ${
+					className={`mask mask-star ${colors[i]} ${
 						i >= parseInt(star) && 'bg-neutral-focus'
 					}`}
 					checked={i === parseInt(star)}
@@ -49,10 +49,7 @@ export default function Detail({ addToCart }) {
 	});
 
 	return (
-		<div className='card  mt-10 justify-center  md:px-40 px-10'>
-			<Link className='btn btn-outline' to={'/products'}>
-				Go back
-			</Link>
+		<div className='card rounded bg-base-300 shadow-sm justify-center  p-10'>
 			<div className='md:flex gap-10'>
 				<div className='image  '>
 					<figure className='p-5 '>
@@ -68,58 +65,42 @@ export default function Detail({ addToCart }) {
 						<h1 className='card-title font-extrabold text-5xl'>
 							{selectedProduct.wig_name}
 						</h1>
-						<div className='rating rating-sm items-center'>
+						<div className='properties flex flex-wrap gap-1 mt-2'>
+							<div className='p-1 rounded-md px-2 text-white bg-neutral'>
+								{selectedProduct.wig_type}
+							</div>
+
+							<div className='p-1 rounded-md px-2 text-white bg-neutral'>
+								{selectedProduct.material}
+							</div>
+
+							<div className='p-1 rounded-md px-2 text-white bg-neutral'>
+								{selectedProduct.color}
+							</div>
+
+							<div className='p-1 rounded-md px-2 text-white bg-neutral'>
+								{selectedProduct.texture}
+							</div>
+
+							<div className='p-1 rounded-md px-2 text-white bg-neutral'>
+								{selectedProduct.length}
+							</div>
+							<div className='p-1 rounded-md px-2 text-white bg-neutral'>
+								{selectedProduct.cap_size}
+							</div>
+
+							<div className='p-1 rounded-md px-2 text-white bg-neutral'>
+								{selectedProduct.density}
+							</div>
+						</div>
+						<div className='rating items-center my-2'>
 							{ratingInputs}
 						</div>
 						<div className='pricing '>
-							<h5 className='mb-3 '>
-								<span>Price</span>{' '}
+							<h5 className='font-bold text-lg w-1/4 text-white flex justify-between'>
+								<span>Price</span>
 								{selectedProduct.price}
 							</h5>
-							<div className='cartigory capitalize  gap-2 items-center'>
-								<div className='flex justify-between mt-1 border-t items-center'>
-									material{' '}
-									<span className='badge badge-secondary'>
-										{selectedProduct.wig_type}
-									</span>
-								</div>
-								<div className='flex justify-between mt-1 border-t items-center'>
-									Type{' '}
-									<span className='badge badge-secondary'>
-										{selectedProduct.material}
-									</span>
-								</div>
-								<div className='flex justify-between mt-1 border-t items-center'>
-									color{' '}
-									<span className='badge badge-secondary'>
-										{selectedProduct.color}
-									</span>
-								</div>
-								<div className='flex justify-between mt-1 border-t items-center'>
-									texture{' '}
-									<span className='badge badge-secondary'>
-										{selectedProduct.texture}
-									</span>
-								</div>
-								<div className='flex justify-between mt-1 border-t items-center'>
-									length{' '}
-									<span className='badge badge-secondary'>
-										{selectedProduct.length}
-									</span>
-								</div>
-								<div className='flex justify-between mt-1 border-t items-center'>
-									cap size{' '}
-									<span className='badge badge-secondary'>
-										{selectedProduct.cap_size}
-									</span>
-								</div>
-								<div className='flex justify-between mt-1 border-t items-center'>
-									density{' '}
-									<span className='badge badge-secondary'>
-										{selectedProduct.density}
-									</span>
-								</div>
-							</div>
 						</div>
 						<div className='divider'></div>
 						<h3>
@@ -127,18 +108,21 @@ export default function Detail({ addToCart }) {
 							{selectedProduct.description}
 						</h3>
 
-						<div className='card-actions'>
-							<button className='btn btn-primary'>
-								Buy Now
-							</button>
-
+						<div className='card-actions '>
 							<button
-								className='btn btn-outline'
+								className='btn btn-primary'
 								onClick={() =>
 									addToCart(selectedProduct)
 								}>
 								Add to Cart
 							</button>
+							<Link to='/cart'
+								className='btn btn-outline'
+								onClick={() =>
+									addToCart(selectedProduct)
+								}>
+								view cart
+							</Link>
 						</div>
 					</div>
 				</div>
