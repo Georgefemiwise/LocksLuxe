@@ -1,14 +1,18 @@
 import React from 'react';
-import wig from '../assets/wig.png';
-import { wigData } from '../wigData';
+import Product from '../assets/wig.png';
+// import { ProductData } from '../ProductData';
 import { useParams, Link } from 'react-router-dom';
+import useFetchProducts from '../hooks/useFetchProducts';
 
 export default function Detail({ addToCart }) {
 	const { id } = useParams();
+	const { products, loading, error } = useFetchProducts();
 
 	const productId = id; // No need to parse as it's already a string
 
-	const selectedProduct = wigData.find((p) => p.wig_id === productId);
+	const selectedProduct = products.find(
+		(p) => p.Product_id === productId,
+	);
 
 	if (!selectedProduct) {
 		return <div>Product not found.</div>;
@@ -44,7 +48,7 @@ export default function Detail({ addToCart }) {
 
 	// Generating the rating radio buttons with background colors based on the star rating
 	const ratingInputs = getRatings({
-		name: selectedProduct.wig_name,
+		name: selectedProduct.Product_name,
 		star: stars,
 	});
 
@@ -54,7 +58,7 @@ export default function Detail({ addToCart }) {
 				<div className='image  '>
 					<figure className='p-5 '>
 						<img
-							src={wig}
+							src={Product}
 							alt='Shoes'
 							className='rounded-lg w-full'
 						/>
@@ -63,11 +67,11 @@ export default function Detail({ addToCart }) {
 				<div className='details'>
 					<div className='card-body'>
 						<h1 className='card-title font-extrabold text-5xl'>
-							{selectedProduct.wig_name}
+							{selectedProduct.Product_name}
 						</h1>
 						<div className='properties flex flex-wrap gap-1 mt-2'>
 							<div className='p-1 rounded-md px-2 text-white bg-neutral'>
-								{selectedProduct.wig_type}
+								{selectedProduct.Product_type}
 							</div>
 
 							<div className='p-1 rounded-md px-2 text-white bg-neutral'>
@@ -116,7 +120,8 @@ export default function Detail({ addToCart }) {
 								}>
 								Add to Cart
 							</button>
-							<Link to='/cart'
+							<Link
+								to='/cart'
 								className='btn btn-outline'
 								onClick={() =>
 									addToCart(selectedProduct)

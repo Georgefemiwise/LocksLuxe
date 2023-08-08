@@ -7,9 +7,11 @@ import Detail from './pages/Detail';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import NavBar from './components/NavBar';
+import useFetchProducts from './hooks/useFetchProducts';
 
 export default function App() {
 	const [cartItems, setCartItems] = useState([]);
+	const { products, loading, error } = useFetchProducts();
 
 	// Function to add an item to the cart
 	const addToCart = (product) => {
@@ -19,7 +21,7 @@ export default function App() {
 	// Function to remove an item from the cart
 	const removeFromCart = (productId) => {
 		const updatedCart = cartItems.filter(
-			(item) => item.wig_id !== productId,
+			(item) => item.Product_id !== productId,
 		);
 		setCartItems(updatedCart);
 	};

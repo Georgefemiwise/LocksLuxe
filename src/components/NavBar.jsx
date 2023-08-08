@@ -1,8 +1,10 @@
 import React from 'react';
-import Cart from '../pages/Cart';
 import { Link } from 'react-router-dom';
+import useFetchProducts from '../hooks/useFetchProducts';
 
-export default function NavBar({ cartItemCount }) {
+export default function NavBar() {
+	const { products, loading, error } = useFetchProducts('cartitems');
+	console.log(products)
 	return (
 		<>
 			<div className='navbar bg-base-200 px-6 mb-6 z-50 border-b border-b-neutral-content'>
@@ -29,9 +31,9 @@ export default function NavBar({ cartItemCount }) {
 							tabIndex={0}
 							className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52'>
 							<li>
-								<a>Item 1</a>
+								<Link to='/'>Home</Link>
 							</li>
-							<li>
+							{/* <li>
 								<a>Parent</a>
 								<ul className='p-2'>
 									<li>
@@ -41,9 +43,9 @@ export default function NavBar({ cartItemCount }) {
 										<a>Submenu 2</a>
 									</li>
 								</ul>
-							</li>
+							</li> */}
 							<li>
-								<a>Item 3</a>
+								<Link to='/products'>Products</Link>
 							</li>
 						</ul>
 					</div>
@@ -55,7 +57,6 @@ export default function NavBar({ cartItemCount }) {
 				<div className='navbar-center hidden lg:flex'>
 					<ul className='menu menu-horizontal px-1'>
 						<li>
-							
 							<Link to='/'>Home</Link>
 						</li>
 						{/* <li tabIndex={0}>
@@ -93,11 +94,10 @@ export default function NavBar({ cartItemCount }) {
 							/>
 						</svg>
 						{/* Cart Item Count Badge */}
-						<span className='badge badge-sm indicator-item'>
-							{cartItemCount}
+						<span className='badge badge-sm badge-info indicator-item'>
+							{products.length}
 						</span>
 					</Link>
-					
 				</div>
 			</div>
 		</>
