@@ -1,5 +1,32 @@
 <?php
+// Establish connection to the database
+include 'connection.php';
 
+
+// Get data sent from AJAX
+$data = json_decode(file_get_contents("php://input"), true);
+
+$date_created = date('Y-m-d');
+
+// Insert data into database
+foreach ($data as $item) {
+    $wig_ID = $item["wig_ID"];
+    $quantity = $item["wig_quantity"]; 
+    $unit_price = $item["unit_price"];
+    $total_price = $item["total_price"];
+    $cart_status = $item["open"];
+    
+    $sql = "INSERT INTO carts (wig_ID, product_quantity, unit_price, total_price, cart_status) VALUES ('$wig_ID',  '$quantity', '$unit_price', '$total_price', '$cart_status', '$date_created')";
+    $conn->query($sql);
+}
+
+// Close connection
+$conn->close();
+?>
+
+
+<?php
+/* 
 // Requiring connection from connection.php file
 require('connection.php');
 
@@ -14,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
             $stmt = $conn->prepare("INSERT INTO carts (wig_ID, product_quantity, unit_price, total_price, cart_status)
-                                VALUES ( :wig_id, :product_quantity, :unit_price, :total_price, :cart_status)");
+                                VALUES ( :wig_id, 5, 200, 1000, :cart_status)");
 
             $stmt->bind_Param(':wig_ID', $wig_id);
             $stmt->bind_Param(':product_quantity', $wig_quantity);
@@ -33,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conn = null;
 
 
-    
+  */  
 
 
 // Function to add an item to the cart
@@ -109,4 +136,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Close the database connection
 /* $conn = null; */
 
-?>
+?> 
