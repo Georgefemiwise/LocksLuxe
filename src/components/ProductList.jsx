@@ -15,6 +15,8 @@ export function ProductList({ ProductsData }) {
 		Product.name.toLowerCase().includes(searchTerm.toLowerCase()),
 	);
 
+	
+
 	return (
 		<>
 			{/* Input field for searching Products */}
@@ -29,7 +31,7 @@ export function ProductList({ ProductsData }) {
 			</div>
 
 			{/* Display the filtered Products in a grid layout */}
-			<div className='justify-center grid px-10 lg:grid-cols-4 max-w-screen-xl md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 p-5'>
+			<div className='justify-center grid px-5 lg:grid-cols-4 max-w-screen-xl md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4'>
 				{filteredProducts.length === 0 ? (
 					// If no Products match the search term, display a message
 					<div className='w-full left-0 flex justify-center absolute'>

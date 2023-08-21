@@ -4,7 +4,7 @@ import useFetchProducts from '../hooks/useFetchProducts';
 
 export default function NavBar() {
 	const { products, loading, error } = useFetchProducts('cartitems');
-	console.log(products)
+	
 	return (
 		<>
 			<div className='navbar bg-base-200 px-6 mb-6 z-50 border-b border-b-neutral-content'>

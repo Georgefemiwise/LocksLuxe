@@ -19,8 +19,6 @@ export default function Checkout() {
 
 // 	console.log(products.items)
 
-	
-
 // 	const [amount, setAmount] = useState(0);
 
 // 	function increase() {
@@ -205,4 +203,3 @@ export default function Checkout() {
 // //       ) : (
 // //         <p>Cart is empty</p>
 // //       )}
-
