@@ -1,6 +1,6 @@
 import React from 'react';
-import Product from '../assets/wig.png';
-// import { ProductData } from '../ProductData';
+import delivery from '../assets/delivery.svg';
+import returns from '../assets/return.svg';
 import { useParams, Link } from 'react-router-dom';
 import useFetchProducts from '../hooks/useFetchProducts';
 
@@ -12,7 +12,7 @@ export default function Detail({ addToCart }) {
 		return <div>Product not found.</div>;
 	}
 	// Helper function to generate rating radio buttons with different background colors
-	const getRatings = ( name, star ) => {
+	const getRatings = (name, star) => {
 		const rates = [];
 
 		for (let i = 1; i <= 5; i++) {
@@ -33,9 +33,9 @@ export default function Detail({ addToCart }) {
 	};
 
 	return (
-		<div className='card rounded bg-base-300 shadow-sm justify-center  p-10'>
+		<div className='card rounded-md bg-base-300 shadow-sm justify-center  p-10'>
 			<div className='md:flex gap-10'>
-				<div className='image  '>
+				<div className='image '>
 					<figure className='p-5 max-w-lg'>
 						<img
 							src={`../../backend/${products.image}`}
@@ -46,65 +46,99 @@ export default function Detail({ addToCart }) {
 				</div>
 				<div className='details'>
 					<div className='card-body'>
-							<div className='rating'>
-								{getRatings(products.name, '3')}
-							</div>
-						<h1 className='card-title font-extrabold text-5xl capitalize'>
+						<h1 className='card-title font-bold text-2xl capitalize'>
 							{products.name}
 						</h1>
-						<div className='properties flex flex-wrap gap-1 mt-2'>
-							<div className='p-1 rounded-md px-2 text-white bg-neutral'>
-								{products.Product_type}
+						<div className='flex justify-between w-fit'>
+							<div className='rating  rating-sm flex items-center'>
+								{getRatings(products.name, '3')}{' '}
+								<span className='mx-4'>
+									({5} Reviews)
+								</span>
+								{'|'}
 							</div>
-
-							<div className='p-1 rounded-md px-2 text-white bg-neutral'>
-								{products.material}
+							<div
+								className={`ml-4 ${
+									products.availability
+										? 'text-success'
+										: 'text-error'
+								}`}>
+								{products.availability
+									? 'in stock'
+									: 'out of stock'}
 							</div>
-
-							<div className='p-1 rounded-md px-2 text-white bg-neutral'>
-								{products.color}
-							</div>
-
-							<div className='p-1 rounded-md px-2 text-white bg-neutral'>
-								{products.texture}
-							</div>
-
-							<div className='p-1 rounded-md px-2 text-white bg-neutral'>
-								{products.length}
-							</div>
-							<div className='p-1 rounded-md px-2 text-white bg-neutral'>
-								{products.cap_size}
-							</div>
-
-							<div className='p-1 rounded-md px-2 text-white bg-neutral'></div>
-						</div>
-						<div className='rating items-center my-2'>
-							{/* {ratingInputs} */}
 						</div>
 						<div className='pricing '>
-							<h5 className='font-bold text-lg w-1/4 text-white flex justify-between'>
-								<span>Price</span>
-								{products.price}
+							<h5 className='text-lg '>
+								₵ {products.price}
 							</h5>
 						</div>
-						<div className='divider'></div>
-						<h3>
-							<p className='font-bold mb-3'>Description</p>
-							{products.description}
-						</h3>
+						<h3>{products.description}</h3>
+						<div className=' divider my-2'/>
+						<div className='properties  text-sm mb-2'>
+							<div className='flex '>
+								Color:
+								<span
+									className={`rounded-md border  py-0 px-5 mx-3 `}>
+									{products.color}
+								</span>
+							</div>
 
-						<div className='card-actions btn-group'>
+							<div className='mt-2 capitalize rounded-md '>
+								texture:{' '}
+								<span className='ml-3 text-secondary'>
+									{products.texture}
+								</span>
+							</div>
+
+							<div className=' rounded-md mt-2'>
+								length:{' '}
+								<span className='ml-4'>
+									{products.length}
+								</span>
+							</div>
+						</div>
+						<div className='card-actions btn-group '>
 							<button
-								className='btn btn-primary'
+								className='btn btn-primary capitalize'
 								onClick={() => addToCart(products)}>
-								Add to Cart
+								buy now
 							</button>
 							<Link
 								to='/cart'
-								className='btn btn-outline'
+								className='btn btn-outline capitalize'
 								onClick={() => addToCart(products)}>
 								view cart
 							</Link>
+						</div>
+
+						<div className='benefits flex bg-white p-3 rounded-md flex-col text-xs mt-3'>
+							<div className=' flex border p-3 rounded-md '>
+								<img src={delivery} />
+
+								<div className='ml-2 text-black'>
+									<h4 className=' font-semibold'>
+										Free Delivery
+									</h4>
+									<p className=''>
+										Enter your postal code for
+										Delivery Availability
+									</p>
+								</div>
+							</div>
+							<div className='benefits flex border bg-white p-3 rounded-md '>
+								<img src={returns} />
+
+								<div className='ml-2 text-black'>
+									<h4 className=' font-semibold'>
+										Return Delivery
+									</h4>
+									<p className=''>
+										Free 30 Days Delivery Returns.
+										Details
+									</p>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

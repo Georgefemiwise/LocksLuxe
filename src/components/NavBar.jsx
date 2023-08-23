@@ -7,7 +7,7 @@ export default function NavBar() {
 	
 	return (
 		<>
-			<div className='navbar bg-base-200 px-6 mb-6 z-50 border-b border-b-neutral-content'>
+			<div className='navbar bg-base-200 px-6 h-fit z-50 border-b border-b-neutral-content'>
 				<div className='navbar-start'>
 					<div className='dropdown'>
 						<label

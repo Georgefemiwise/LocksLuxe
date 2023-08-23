@@ -48,7 +48,7 @@ export function ProductList({ ProductsData }) {
 							name={Product.name}
 							price={Product.price}
 							description={Product.description}
-							rating={Product.ratings}
+							rating={Product.rating}
 							image={Product.image}
 							availability={Product.availability}
 						/>

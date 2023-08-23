@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import useDeleteCartItemHook from '../hooks/useDeleteCart';
 
 const CartItems = () => {
-	const data = useFetchProducts('cartitems/');
+	const data = useFetchProducts();
 	const cartItems = data.products;
 	const error = data.error;
 	const loading = data.loading;
@@ -31,7 +31,7 @@ const CartItems = () => {
 	let subtotal = 0;
 	return (
 		<>
-			<div className='h-screen lg:w-[70rem]'>
+			<div className='h-screen lg:w-[70rem] '>
 				
 
 				<div className='mx-auto  justify-center px-6 md:flex md:space-x-6 xl:px-0 '>

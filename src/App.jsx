@@ -25,7 +25,7 @@ export default function App() {
 			<div className=' fixed w-full z-50'>
 				<NavBar cartItemCount={cartItems.length} />
 			</div>
-			<div className='grid justify-center  min-h-screen md:px-32 py-24 '>
+			<div className='grid justify-center  flex-1 md:px-32 pt-20 '>
 				<Routes>
 					<Route path='/' index element={<Home />}></Route>
 					<Route path='/products' element={<Product />} />
