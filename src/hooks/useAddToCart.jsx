@@ -12,12 +12,12 @@ const useAddToCart = () => {
 		setAddingError(null);
 
 		const orderId = localStorage.getItem('orderId');
-		const product = 2; // Product ID
+	
 
 		try {
 			if (orderId) {
 				// If orderId exists, send a request to add to an existing order
-				const url = `http://127.0.0.1:8000/add-to-order/`;
+				const url = `http://127.0.0.1:8000/orders/${orderId}/items/add/`;
 				const requestData = {
 					product: productId,
 					order: orderId,
@@ -25,7 +25,8 @@ const useAddToCart = () => {
 
 				axios.post(url, requestData) // Use Axios.post instead of fetch
 					.then((response) => {
-						console.log(response.data); // Log the response data to check its content
+						console.log(response.data);
+						 // Log the response data to check its content
 					})
 					.catch((error) => {
 						// Handle errors
@@ -33,8 +34,7 @@ const useAddToCart = () => {
 					});
 			} else {
 				// If orderId doesn't exist, create a new order with items
-				const url =
-					'http://127.0.0.1:8000/create-order-with-items/';
+				const url = `http://127.0.0.1:8000/orders/`;
 				const requestData = { order_item_id: productId };
 
 				axios.post(url, requestData) // Use Axios.post instead of fetch

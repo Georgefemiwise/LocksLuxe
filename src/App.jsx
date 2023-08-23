@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+// App.jsx
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Product from './pages/Product';
@@ -7,40 +8,38 @@ import Detail from './pages/[id]';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import NavBar from './components/NavBar';
-import useFetchProducts from './hooks/useFetchProducts';
+import { NavigationProvider } from './contexts/NavigationContext'; // Import the NavigationProvider
 
 export default function App() {
-	const [cartItems, setCartItems] = useState([]);
-	const { products, loading, error } = useFetchProducts();
-
-	// Function to remove an item from the cart
-	const removeFromCart = (productId) => {
-		const updatedCart = cartItems.filter(
-			(item) => item.Product_id !== productId,
-		);
-		setCartItems(updatedCart);
-	};
 	return (
-		<div className='font-sans'>
-			<div className=' fixed w-full z-50'>
-				<NavBar cartItemCount={cartItems.length} />
-			</div>
-			<div className='grid justify-center  flex-1 md:px-32 pt-20 '>
-				<Routes>
-					<Route path='/' index element={<Home />}></Route>
-					<Route path='/products' element={<Product />} />
-					<Route path='/payment' element={<Payment />} />
-					<Route path='/products/:id' element={<Detail />} />
+		<NavigationProvider>
+			<div className='font-sans'>
+				<div className=' fixed w-full z-50'>
+					<NavBar  />
+				</div>
+				<div className='grid justify-center  flex-1 md:px-32 pt-20 '>
+					<Routes>
+						<Route path='/' index element={<Home />} />
+						<Route path='/products' element={<Product />} />
+						<Route path='/payment' element={<Payment />} />
+						<Route
+							path='/products/:id'
+							element={<Detail />}
+						/>
 
-					<Route
-						path='/cart'
-						element={<Cart cartItemsList={cartItems} />}
-					/>
-					<Route path='/cart/checkout' element={<Checkout />} />
+						<Route
+							path='/cart'
+							element={<Cart />}
+						/>
+						<Route
+							path='/cart/checkout'
+							element={<Checkout />}
+						/>
 
-					<Route path='*' element={<h1>notfound</h1>} />
-				</Routes>
+						<Route path='*' element={<h1>notfound</h1>} />
+					</Routes>
+				</div>
 			</div>
-		</div>
+		</NavigationProvider>
 	);
 }

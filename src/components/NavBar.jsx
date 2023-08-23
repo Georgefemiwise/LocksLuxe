@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import useFetchProducts from '../hooks/useFetchProducts';
 
 export default function NavBar() {
-	const { products, loading, error } = useFetchProducts('cartitems');
-	
+	const orderId = localStorage.getItem('orderId');
+	const { products } = useFetchProducts(`orders/${orderId}/items/list/`);
+
 	return (
 		<>
 			<div className='navbar bg-base-200 px-6 h-fit z-50 border-b border-b-neutral-content'>

@@ -74,7 +74,7 @@ export default function Detail({ addToCart }) {
 							</h5>
 						</div>
 						<h3>{products.description}</h3>
-						<div className=' divider my-2'/>
+						<div className=' divider my-2' />
 						<div className='properties  text-sm mb-2'>
 							<div className='flex '>
 								Color:
@@ -106,8 +106,7 @@ export default function Detail({ addToCart }) {
 							</button>
 							<Link
 								to='/cart'
-								className='btn btn-outline capitalize'
-								onClick={() => addToCart(products)}>
+								className='btn btn-outline capitalize'>
 								view cart
 							</Link>
 						</div>

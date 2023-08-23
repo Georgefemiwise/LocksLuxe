@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useAddToCart from '../hooks/useAddToCart';
+import { useNavigation } from '../contexts/NavigationContext';
 
 export default function ProductCard({
 	availability,
@@ -11,9 +12,11 @@ export default function ProductCard({
 	rating,
 }) {
 	const { addCartItem, addingToCart, addingError } = useAddToCart();
+	const navigation = useNavigation();
 
-	const handleAddToCart = (productId) => {
-		addCartItem(productId);
+	const handleAddToCart = async (productId) => {
+		await addCartItem(productId);
+		navigation.refreshNavigation();
 	};
 
 	const rate = (rate) => {
@@ -37,8 +40,6 @@ export default function ProductCard({
 	};
 
 	const discount = Math.round(Math.random() * -100);
-	console.log(discount);
-
 	return (
 		<div className='relative p-5  m-10 w-full max-w-xs overflow-hidden group rounded-lg bg-gray-50 shadow-md font-sans'>
 			<div className='absolute left-5 top-5 items-center justify-between z-10'>
