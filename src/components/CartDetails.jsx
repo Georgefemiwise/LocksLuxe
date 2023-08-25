@@ -64,7 +64,6 @@ const CartItems = () => {
 
 	return (
 		<div className='overflow-y-auto md:flex'>
-			
 			<table className='table'>
 				{/* head */}
 				<thead>

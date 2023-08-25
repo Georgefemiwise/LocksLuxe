@@ -6,7 +6,7 @@ import Product from './pages/Product';
 import Payment from './pages/Payment';
 import Detail from './pages/[id]';
 import Cart from './pages/Cart';
-import Checkout from './pages/Checkout';
+
 import NavBar from './components/NavBar';
 import { NavigationProvider } from './contexts/NavigationContext'; // Import the NavigationProvider
 
@@ -31,10 +31,7 @@ export default function App() {
 							path='/cart'
 							element={<Cart />}
 						/>
-						<Route
-							path='/cart/checkout'
-							element={<Checkout />}
-						/>
+						
 
 						<Route path='*' element={<h1>notfound</h1>} />
 					</Routes>

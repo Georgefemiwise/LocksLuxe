@@ -10,7 +10,7 @@ export default function Home() {
 		setShowAlert(true);
 		setAlertType(type);
 		setAlertMessage(message);
-		localStorage.removeItem('orderId');
+		localStorage.removeItem(localStorage.getItem(localStorage.removeItem('orderId')));
 	};
 
 	return (

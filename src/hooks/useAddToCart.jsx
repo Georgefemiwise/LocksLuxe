@@ -25,7 +25,8 @@ const useAddToCart = () => {
 
 				axios.post(url, requestData) // Use Axios.post instead of fetch
 					.then((response) => {
-						console.log(response.data);
+						console.log(response.data.message);
+						// window.location.reload();
 						 // Log the response data to check its content
 					})
 					.catch((error) => {
@@ -39,7 +40,7 @@ const useAddToCart = () => {
 
 				axios.post(url, requestData) // Use Axios.post instead of fetch
 					.then((response) => {
-						console.log(response.data); // Log the response data to check its content
+						// console.log(response.data); // Log the response data to check its content
 
 						// Store the newly created orderId in local storage
 						localStorage.setItem(

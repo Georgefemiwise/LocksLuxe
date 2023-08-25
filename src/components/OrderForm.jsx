@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Alert from '../hooks/Confirm';
+import Confirm from '../hooks/Confirm';
+import { Navigate } from 'react-router-dom';
 const OrderForm = ({ totalAmount }) => {
 	const orderId = localStorage.getItem('orderId');
 
@@ -82,8 +83,14 @@ const OrderForm = ({ totalAmount }) => {
 							order: localStorage.getItem('orderId'),
 						})
 							.then((response) => {
+								window.alert_confrimer.showModal();
+
 								console.log(response.data);
-								// Log the response data to check its content
+								localStorage.removeItem(
+									localStorage.getItem('orderId'),
+								);
+								Navigate({to: '/products'});
+								window.location.reload();
 							})
 							.catch((error) => {
 								// Handle errors
@@ -102,61 +109,15 @@ const OrderForm = ({ totalAmount }) => {
 			},
 		});
 		handler.openIframe();
-		// var handler = PaystackPop.setup({
-		// 	key: 'pk_test_e9a874e1f8db72ffe0451c6ade70033e60890317', // Replace with your public key
-		// 	email: formData.email,
-		// 	amount: formData.total_amount * 100, // the amount value is multiplied by 100 to convert to the lowest currency unit
-		// 	currency: 'GHS', // Use GHS for Ghana Cedis or USD for US Dollars
-		// 	ref: transactionReference,
-
-		// 	callback: function (response) {
-		// 		//this happens after the payment is completed successfully
-		// 		var reference = response.reference;
-
-		// 		setFormData((prevData) => ({
-		// 			...prevData,
-		// 			payment_ref: reference,
-		// 		}));
-
-		// 		// Make the API call to your Django endpoint using axios
-		// 		axios.get(`http://127.0.0.1:8000/verify/${reference}/`)
-		// 			.then((apiResponse) => {
-		// 				// Handle the success response from your Django API
-
-		// 				const url = `http://127.0.0.1:8000/orders/${orderId}/checkout/`;
-
-		// 				axios.post(url, formData) // Use Axios.post instead of fetch
-		// 					.then((response) => {
-		// 						console.log(response.data);
-		// 						// Log the response data to check its content
-		// 					})
-		// 					.catch((error) => {
-		// 						// Handle errors
-		// 						console.error(error);
-		// 					});
-		// 			})
-		// 			.catch((error) => {
-		// 				// Handle the error response from your Django API
-		// 				handleShowAlert('Error: ' + error, 'error');
-		// 			});
-		// 	},
-		// 	onClose: function () {
-		// 		handleShowAlert(
-		// 			'Transaction was not completed, you closed the window.',
-		// 			'error',
-		// 		);
-		// 	},
-		// });
-		// handler.openIframe();
 	};
 
 	return (
 		<dialog id='my_modal_4' className='modal'>
-			<Alert
+			{/* <Alert
 				trigger={showAlert}
 				type={alertType}
 				message={alertMessage}
-			/>
+			/> */}
 
 			<form
 				method='dialog'
