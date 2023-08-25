@@ -41,7 +41,7 @@ export default function ProductCard({
 
 	const discount = Math.round(Math.random() * -100);
 	return (
-		<div className='relative p-5  m-10 w-full max-w-xs overflow-hidden group rounded-lg bg-gray-50 shadow-md font-sans'>
+		<div className='relative p-5   m-10 w-full max-w-xs overflow-hidden group rounded-lg bg-base-200 shadow-md font-sans'>
 			<div className='absolute left-5 top-5 items-center justify-between z-10'>
 				<span
 					className={`rounded-md p-1 px-3 text-xs  text-white ${
@@ -58,12 +58,6 @@ export default function ProductCard({
 						alt={`${name}`}
 					/>
 				</Link>
-				<button
-					className=' btn w-full hidden group-hover:flex absolute bottom-0'
-					onClick={() => handleAddToCart(id)}
-					disabled={addingToCart}>
-					{addingToCart ? 'Adding...' : 'Add to Cart'}
-				</button>
 			</div>
 
 			<div className='mt-4 pb-5 text-black'>
@@ -85,6 +79,12 @@ export default function ProductCard({
 						<span className='text-sm'>
 							({Math.round(Math.random() + 10)})
 						</span>
+						<button
+							className=' btn w- hidden group-hover:flex absolute right-2 bottom-2 '
+							onClick={() => handleAddToCart(id)}
+							disabled={addingToCart}>
+							{addingToCart ? 'Adding...' : 'Add to Cart'}
+						</button>
 					</p>
 				</div>
 			</div>

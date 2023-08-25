@@ -6,11 +6,15 @@ import { useNavigation } from '../contexts/NavigationContext';
 import del from '../assets/delete.svg';
 
 import { useUpdateOrderItem } from '../hooks/useUpdateOrderItem';
+import OrderForm from './OrderForm';
+import Alert from './Alert';
 const CartItems = () => {
 	const orderId = localStorage.getItem('orderId');
-
 	const { quantity, updateOrderItem } = useUpdateOrderItem();
-
+	const navigation = useNavigation();
+	const { deleteItem } = useDeleteItem();
+	const [listOfItem, setListOfItem] = useState([]);
+	let subtotal = 0;
 	const handleQuantityChange = async (itemId, newQuantity, productId) => {
 		try {
 			await updateOrderItem(orderId, itemId, newQuantity, productId);
@@ -21,12 +25,6 @@ const CartItems = () => {
 		}
 	};
 
-	const navigation = useNavigation();
-	const { deleteItem } = useDeleteItem();
-
-	const [listOfItem, setListOfItem] = useState([]);
-
-	console.log(listOfItem);
 	// Fetch order items associated with the orderId
 	const fetchOrderItems = async () => {
 		try {
@@ -64,10 +62,9 @@ const CartItems = () => {
 		navigation.refreshNavigation();
 	}, []);
 
-	let subtotal = 0;
-
 	return (
 		<div className='overflow-y-auto md:flex'>
+			
 			<table className='table'>
 				{/* head */}
 				<thead>
@@ -124,13 +121,14 @@ const CartItems = () => {
 								/>
 							</td>
 							<td>
-								{Math.round(item.quantity *
-									item.productDetails.price)}
+								{Math.round(
+									item.quantity *
+										item.productDetails.price,
+								)}
 							</td>
 
 							<th className='  flex w-28 '>
 								<div className='hidden group-hover:flex gap-3'>
-									
 									<img
 										className='cursor-pointer  text'
 										src={del}
@@ -149,17 +147,18 @@ const CartItems = () => {
 			<div className='mt-6 h-full rounded-lg border bg-neutral  p-6 shadow-md md:mt-0 md:w-1/3'>
 				{/* Subtotal, Shipping, and Total information */}
 				{/* Replace with your own calculations */}
-				<p className='text-base-200'>Subtotal: Ghs {Math.round(subtotal)}</p>
-				<p className='text-base-200'>Shipping: $4.99</p>
-				<hr className='my-4' />
-				<p className='text-lg font-bold text-base-100'>
-					Total: Ghs ...
+				<p className='text-base-200'>
+					Subtotal: Ghs {Math.round(subtotal)}
 				</p>
-				<Link
-					to={'/cart/checkout'}
-					className='btn btn-primary mt-6 w-full'>
-					Check out
-				</Link>
+
+				<hr className='my-4' />
+
+				<OrderForm totalAmount={Math.round(subtotal)} />
+				<button
+					className='btn w-full'
+					onClick={() => window.my_modal_4.showModal()}>
+					start order
+				</button>
 			</div>
 		</div>
 	);

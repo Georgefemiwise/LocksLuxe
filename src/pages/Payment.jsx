@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import useAlert from '../hooks/Alert';
+import useAlert from '../hooks/Confirm';
+import { defaults } from 'autoprefixer';
 
-const PaymentForm = () => {
+export default function PaymentForm() {
 	const [email, setEmail] = useState('');
 	const [amount, setAmount] = useState('');
 	const [firstName, setFirstName] = useState('');
@@ -55,10 +56,7 @@ const PaymentForm = () => {
 					})
 					.catch((error) => {
 						// Handle the error response from your Django API
-						handleShowAlert(
-							'Error: ' + error,
-							'error',
-						);
+						handleShowAlert('Error: ' + error, 'error');
 					});
 			},
 			onClose: function () {
@@ -72,68 +70,75 @@ const PaymentForm = () => {
 	};
 
 	return (
-		<form id='paymentForm' onSubmit={handleSubmit}>
-			<div className='card rounded bg-base-300 shadow-sm'>
-				<div className='card-body'>
-					<div className='form-control w-full flex '>
-						<label htmlFor='email'>Email Address </label>
-						<input
-							type='email'
-							id='email-address'
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							required
-							className='input input-bordered w-full'
-						/>
-					</div>
-					<div className='form-group'>
-						<label htmlFor='amount'>Amount</label>
-						<input
-							type='number'
-							id='amount'
-							value={amount}
-							onChange={(e) => setAmount(e.target.value)}
-							required
-							className='input input-bordered w-full'
-						/>
-					</div>
-					<div className='form-group'>
-						<label htmlFor='first-name'>First Name</label>
-						<input
-							type='text'
-							id='first-name'
-							value={firstName}
-							onChange={(e) =>
-								setFirstName(e.target.value)
-							}
-							className='input input-bordered w-full'
-						/>
-					</div>
-					<div className='form-group'>
-						<label htmlFor='last-name'>Last Name</label>
-						<input
-							type='text'
-							id='last-name'
-							value={lastName}
-							onChange={(e) => setLastName(e.target.value)}
-							className='input input-bordered w-full'
-						/>
+		<>
+			<form id='paymentForm' onSubmit={handleSubmit}>
+				<div className='card rounded bg-base-300 shadow-sm'>
+					<div className='card-body'>
+						<div className='form-control w-full flex '>
+							<label htmlFor='email'>Email Address </label>
+							<input
+								type='email'
+								id='email-address'
+								value={email}
+								onChange={(e) =>
+									setEmail(e.target.value)
+								}
+								required
+								className='input input-bordered w-full'
+							/>
+						</div>
+						<div className='form-group'>
+							<label htmlFor='amount'>Amount</label>
+							<input
+								type='number'
+								id='amount'
+								value={amount}
+								onChange={(e) =>
+									setAmount(e.target.value)
+								}
+								required
+								className='input input-bordered w-full'
+							/>
+						</div>
+						<div className='form-group'>
+							<label htmlFor='first-name'>
+								First Name
+							</label>
+							<input
+								type='text'
+								id='first-name'
+								value={firstName}
+								onChange={(e) =>
+									setFirstName(e.target.value)
+								}
+								className='input input-bordered w-full'
+							/>
+						</div>
+						<div className='form-group'>
+							<label htmlFor='last-name'>Last Name</label>
+							<input
+								type='text'
+								id='last-name'
+								value={lastName}
+								onChange={(e) =>
+									setLastName(e.target.value)
+								}
+								className='input input-bordered w-full'
+							/>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div className='form-control card '>
-				<button
-					type='submit'
-					className='btn btn-primary rounded-none'>
-					Pay
-				</button>
-			</div>
-			<Alert />
-		</form>
+				<div className='form-control card '>
+					<button
+						type='submit'
+						className='btn btn-primary rounded-none'>
+						Pay
+					</button>
+				</div>
+			</form>
+		</>
 	);
-};
-
-export default PaymentForm;
+}
 
 // {
 //   "status": true,
