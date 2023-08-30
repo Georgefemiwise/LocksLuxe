@@ -42,7 +42,7 @@ export default function ProductCard({
 	const discount = Math.round(Math.random() * -100);
 	return (
 		<div className='relative p-5   m-10 w-full max-w-xs overflow-hidden group rounded-lg bg-base-200 shadow-md font-sans'>
-			<div className='absolute left-5 top-5 items-center justify-between z-10'>
+			<div className='absolute left-5 top-5 confirmPopUp justify-between z-10'>
 				<span
 					className={`rounded-md p-1 px-3 text-xs  text-white ${
 						availability && 'bg-error'
@@ -67,14 +67,14 @@ export default function ProductCard({
 					</h5>
 				</Link>
 
-				<div className=' items-center justify-between'>
+				<div className=' confirmPopUp justify-between'>
 					<p className='font-bold text-error  '>
-						₵ {price}
+						$ {price}
 						<span className='line-through ml-3 text-black font-normal'>
-							₵ {Math.round(price - 10 * discount)}
+							$ {Math.round(price - 10 * discount)}
 						</span>
 					</p>
-					<p className='flex text-xl items-center mt-2'>
+					<p className='flex text-xl confirmPopUp mt-2'>
 						{rate(rating)}{' '}
 						<span className='text-sm'>
 							({Math.round(Math.random() + 10)})

@@ -1,7 +1,7 @@
 // App.jsx
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import Product from './pages/Product';
 import Payment from './pages/Payment';
 import Detail from './pages/[id]';
@@ -17,7 +17,7 @@ export default function App() {
 				<div className=' fixed w-full z-50'>
 					<NavBar  />
 				</div>
-				<div className='grid justify-center  flex-1 md:px-32 pt-20 '>
+				<div className='grid justify-center  flex-1 md:px-20 pt-20 '>
 					<Routes>
 						<Route path='/' index element={<Home />} />
 						<Route path='/products' element={<Product />} />

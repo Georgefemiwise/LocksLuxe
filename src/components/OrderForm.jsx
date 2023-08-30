@@ -56,7 +56,7 @@ const OrderForm = ({ totalAmount }) => {
 			key: 'pk_test_e9a874e1f8db72ffe0451c6ade70033e60890317',
 			email: formData.email,
 			amount: totalAmount * 100,
-			currency: 'GHS',
+			currency: 'DOLLAR',
 			ref: getRef, //  reference  generated
 
 			callback: function (response) {
@@ -83,13 +83,16 @@ const OrderForm = ({ totalAmount }) => {
 							order: localStorage.getItem('orderId'),
 						})
 							.then((response) => {
-								window.alert_confrimer.showModal();
-
 								console.log(response.data);
+								// window.confirmPopUp.showModal();
+								alert('order in process ');
+
 								localStorage.removeItem(
 									localStorage.getItem('orderId'),
 								);
-								Navigate({to: '/products'});
+								window.location.replace(
+									'http://127.0.0.1:8000/products',
+								);
 								window.location.reload();
 							})
 							.catch((error) => {
@@ -126,7 +129,7 @@ const OrderForm = ({ totalAmount }) => {
 				<h3 className='font-bold text-lg'>Billing Details!</h3>
 				<div
 					onClick={() => window.my_modal_4.close()}
-					className='absolute btn btn-circle right-2 top-2'>
+					className='absolute btn btn-circle btn-xs btn-danger right-2 top-2'>
 					x
 				</div>
 				<div className='flex justify-around mt-4 '>
@@ -227,8 +230,8 @@ const OrderForm = ({ totalAmount }) => {
 
 						<button
 							type='submit'
-							className={'btn btn-primary mt-4 '}>
-							Submit
+							className={'btn btn-success mt-4 '}>
+							checkout now
 						</button>
 
 						<input

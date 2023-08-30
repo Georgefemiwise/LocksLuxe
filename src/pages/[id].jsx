@@ -3,10 +3,18 @@ import delivery from '../assets/delivery.svg';
 import returns from '../assets/return.svg';
 import { useParams, Link } from 'react-router-dom';
 import useFetchProducts from '../hooks/useFetchProducts';
+import useAddToCart from '../hooks/useAddToCart';
 
-export default function Detail({ addToCart }) {
+export default function Detail() {
 	const { id } = useParams();
 	const { products, loading, error } = useFetchProducts(`products/${id}`);
+	const { addCartItem, addingToCart, addingError } = useAddToCart();
+	// const navigation = useNavigation();
+console.log(products)
+	const handleAddToCart = async (productId) => {
+		await addCartItem(productId);
+		// navigation.refreshNavigation();
+	};
 
 	if (!products) {
 		return <div>Product not found.</div>;
@@ -33,10 +41,13 @@ export default function Detail({ addToCart }) {
 	};
 
 	return (
-		<div className='card rounded-md bg-base-300 shadow-sm justify-center  p-10'>
+		<div className='card  rounded-md bg-base-300 shadow-sm justify-center  p-10'>
+			<Link className='btn-link w-fit' to='/products'>
+				{'<<<<'}
+			</Link>
 			<div className='md:flex gap-10'>
 				<div className='image '>
-					<figure className='p-5 max-w-lg'>
+					<figure className='p-5 max-w-sm'>
 						<img
 							src={`../../backend/${products.image}`}
 							alt='Shoes'
@@ -101,8 +112,8 @@ export default function Detail({ addToCart }) {
 						<div className='card-actions btn-group '>
 							<button
 								className='btn btn-primary capitalize'
-								onClick={() => addToCart(products)}>
-								buy now
+								onClick={() => handleAddToCart(id)}>
+								add to cart
 							</button>
 							<Link
 								to='/cart'
@@ -111,21 +122,21 @@ export default function Detail({ addToCart }) {
 							</Link>
 						</div>
 
-						<div className='benefits flex bg-white p-3 rounded-md flex-col text-xs mt-3'>
-							<div className=' flex border p-3 rounded-md '>
+						<div className='benefits   flexp-3 rounded-md flex-col text-xs mt-3'>
+							<div className=' flex border p-3 rounded-md  bg-base-200 h-14'>
 								<img src={delivery} />
 
 								<div className='ml-2 text-black'>
 									<h4 className=' font-semibold'>
 										Free Delivery
 									</h4>
-									<p className=''>
+									<p className='text-xs'>
 										Enter your postal code for
 										Delivery Availability
 									</p>
 								</div>
 							</div>
-							<div className='benefits flex border bg-white p-3 rounded-md '>
+							<div className='benefits flex border  p-3 rounded-md  bg-base-200 h-14'>
 								<img src={returns} />
 
 								<div className='ml-2 text-black'>

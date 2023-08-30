@@ -8,11 +8,11 @@ export default function Confirm() {
 			{/* Open the modal using ID.showModal() method */}
 			<button
 				className='btn'
-				onClick={() => window.alert_confrimer.showModal()}>
+				onClick={() => window.confirmPopUp.showModal()}>
 				open modal
 			</button>
 			<dialog
-				id='alert_confrimer'
+				id='confirmPopUp'
 				className='modal modal-bottom sm:modal-middle '>
 				<form method='dialog' className='modal-box'>
 					<div className='flex flex-col justify-center items-center'>

@@ -62,11 +62,12 @@ const CartItems = () => {
 		navigation.refreshNavigation();
 	}, []);
 
+	// console.log(listOfItem);
 	return (
 		<div className='overflow-y-auto md:flex'>
-			<table className='table'>
+			<table className='table table-zebra'>
 				{/* head */}
-				<thead>
+				<thead className='bg-base-content text-base-100 '>
 					<tr>
 						<th>Product</th>
 						<th>Price</th>
@@ -77,16 +78,16 @@ const CartItems = () => {
 				</thead>
 				<tbody>
 					{listOfItem.map((item) => (
-						<tr className='group hover:bg-opacity-30'>
-							<p className='hidden'>
+						<tr key={item.id} className='group hover:bg-opacity-30'>
+							<td className='hidden'>
 								{
 									(subtotal +=
 										item.quantity *
 										item.productDetails.price)
 								}
-							</p>
+							</td>
 							<td className='flex items-center align-middle'>
-								<div className='flex items-center space-x-3'>
+								<div className='flex items-center space-x-3 w-52'>
 									<div className='avatar'>
 										<div className='mask mask-squircle w-12 h-12'>
 											<img
@@ -96,7 +97,7 @@ const CartItems = () => {
 										</div>
 									</div>
 									<div>
-										<div className='font-bold'>
+										<div className='font-bold flex-nowrap'>
 											{
 												item.productDetails
 													.name
@@ -143,7 +144,7 @@ const CartItems = () => {
 					))}
 				</tbody>
 			</table>
-			<div className='mt-6 h-full rounded-lg border bg-neutral  p-6 shadow-md md:mt-0 md:w-1/3'>
+			<div className='mt-6 ml-3 h-full rounded-lg border bg-base-content  p-6 shadow-md md:mt-0 md:w-1/3'>
 				{/* Subtotal, Shipping, and Total information */}
 				{/* Replace with your own calculations */}
 				<p className='text-base-200'>
@@ -153,10 +154,11 @@ const CartItems = () => {
 				<hr className='my-4' />
 
 				<OrderForm totalAmount={Math.round(subtotal)} />
+
 				<button
 					className='btn w-full'
 					onClick={() => window.my_modal_4.showModal()}>
-					start order
+					order
 				</button>
 			</div>
 		</div>
@@ -164,19 +166,3 @@ const CartItems = () => {
 };
 
 export default CartItems;
-
-// const OrderItem = ({ orderItem }) => {
-
-//   return (
-//     <div>
-//       <p>{orderItem.product.name}</p>
-//       <input
-//         type="number"
-//         value={quantity}
-//         onChange={(e) => handleQuantityChange(e.target.value)}
-//       />
-//     </div>
-//   );
-// };
-
-// export  OrderItem;
